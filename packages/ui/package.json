@@ -1,14 +1,10 @@
 {
-  "name": "@acme/ui",
+  "name": "@flownodes/ui",
   "version": "0.0.0",
   "sideEffects": false,
   "license": "MIT",
   "exports": {
-    "./button": {
-      "types": "./src/button.tsx",
-      "import": "./dist/button.mjs",
-      "require": "./dist/button.js"
-    }
+    "./button": "./src/button.tsx"
   },
   "scripts": {
     "build": "tsup",
