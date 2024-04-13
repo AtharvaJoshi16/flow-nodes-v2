@@ -2,10 +2,24 @@
 import { AuthButton } from "@flownodes/ui/authButton";
 import { Google } from "@flownodes/ui/google";
 import { Facebook, GitHub, X } from "@mui/icons-material";
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
+import { ROUTES } from "../../../types/routes.enum";
+import { useReactResponsive } from "../hooks/useReactResponsive";
+import Loading from "../signin/loading";
 
 export const SignIn = () => {
+  const { isPhone, isTablet, isDesktop, isDesktopLarge } = useReactResponsive();
+  const { status } = useSession();
+
+  if (status === "loading") {
+    return <Loading />;
+  }
+  if (status === "authenticated") {
+    redirect(ROUTES.HOME);
+  }
   return (
     <Box
       className="w-fit sm:w-[550px] bg-white rounded-2xl p-5 flex flex-col items-center"
@@ -37,26 +51,46 @@ export const SignIn = () => {
 
       <Box className="relative mx-2 my-[20px] border rounded-2xl p-3 border-slate-200 flex flex-col items-center">
         <Box className="absolute top-[-12px] bg-white px-4">Sign in via</Box>
-        <Box className="flex flex-col items-center gap-[30px] mx-[30px] my-[40px]">
-          <AuthButton startIcon={<Google size={24} />}>
-            Sign up with Google
-          </AuthButton>
-          <AuthButton
-            startIcon={
-              <GitHub
-                sx={{
-                  color: "#000",
-                }}
-              />
-            }
-          >
-            Sign up with Github
-          </AuthButton>
-          <AuthButton startIcon={<X />}>Sign up with X</AuthButton>
-          <AuthButton startIcon={<Facebook color="primary" />}>
-            Sign up with Facebook
-          </AuthButton>
-        </Box>
+        {!isPhone || isTablet || isDesktop || isDesktopLarge ? (
+          <Box className="flex flex-col items-center gap-[30px] mx-[30px] my-[40px]">
+            <AuthButton
+              onClick={() => signIn("google")}
+              startIcon={<Google size={24} />}
+            >
+              Sign up with Google
+            </AuthButton>
+            <AuthButton
+              startIcon={
+                <GitHub
+                  sx={{
+                    color: "#000",
+                  }}
+                />
+              }
+            >
+              Sign up with Github
+            </AuthButton>
+            <AuthButton startIcon={<X />}>Sign up with X</AuthButton>
+            <AuthButton startIcon={<Facebook color="primary" />}>
+              Sign up with Facebook
+            </AuthButton>
+          </Box>
+        ) : (
+          <Box className="flex justify-center items-center gap-[30px] mx-[30px] my-[40px]">
+            <IconButton onClick={() => signIn("google")}>
+              <Google size={24} />
+            </IconButton>
+            <IconButton>
+              <GitHub sx={{ color: "#000" }} />
+            </IconButton>
+            <IconButton>
+              <X sx={{ color: "#000" }} />
+            </IconButton>
+            <IconButton>
+              <Facebook color="primary" />
+            </IconButton>
+          </Box>
+        )}
       </Box>
     </Box>
   );
