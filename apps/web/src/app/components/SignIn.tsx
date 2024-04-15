@@ -60,6 +60,7 @@ export const SignIn = () => {
               Sign up with Google
             </AuthButton>
             <AuthButton
+              onClick={() => signIn("github")}
               startIcon={
                 <GitHub
                   sx={{
@@ -80,7 +81,7 @@ export const SignIn = () => {
             <IconButton onClick={() => signIn("google")}>
               <Google size={24} />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={() => signIn("github")}>
               <GitHub sx={{ color: "#000" }} />
             </IconButton>
             <IconButton>

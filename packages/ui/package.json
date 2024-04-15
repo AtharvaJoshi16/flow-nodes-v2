@@ -6,7 +6,8 @@
   "exports": {
     "./authButton": "./src/authButton.tsx",
     "./github": "./src/Icons/Github.tsx",
-    "./google": "./src/Icons/Google.tsx"
+    "./google": "./src/Icons/Google.tsx",
+    "./logo": "./src/Logo.tsx"
   },
   "scripts": {
     "build": "tsup",
