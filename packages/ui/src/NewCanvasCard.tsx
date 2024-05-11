@@ -1,13 +1,14 @@
-import { Card, CardActionArea, CardContent } from "@mui/material";
+import { Card, CardActionArea, CardContent, CardProps } from "@mui/material";
 import { NewCanvasIcon } from "./Icons/NewCanvasIcon";
 
-export const NewBlankCanvasCard = () => {
+export const NewBlankCanvasCard = (props: CardProps) => {
   return (
     <Card
       sx={{
         width: "200px",
         height: "250px",
       }}
+      {...props}
     >
       <CardActionArea
         sx={{
@@ -23,9 +24,6 @@ export const NewBlankCanvasCard = () => {
           }}
         >
           <NewCanvasIcon />
-          {/* <Typography variant="h6" fontWeight={600}>
-            Start Editing!
-          </Typography> */}
         </CardContent>
       </CardActionArea>
     </Card>

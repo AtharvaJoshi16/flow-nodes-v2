@@ -4,7 +4,6 @@ import { CloudDoneRounded } from "@mui/icons-material";
 import {
   Avatar,
   Box,
-  Button,
   CircularProgress,
   Divider,
   List,
@@ -13,11 +12,12 @@ import {
   Popover,
   Typography,
 } from "@mui/material";
-import { ChevronDown, Download, LogOut, Share2, UserCog } from "lucide-react";
+import { ChevronDown, LogOut, UserCog } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { HeaderProps } from "../../../../types/components/header.types";
 import { ROUTES } from "../../../../types/routes.enum";
+import { HeaderButtons } from "../headerButtons/headerButtons";
 
 export const HeaderDesktop = ({
   path,
@@ -141,47 +141,7 @@ export const HeaderDesktop = ({
           alignItems: "center",
         }}
       >
-        {path !== ROUTES.HOME && (
-          <Box
-            sx={{
-              display: "flex",
-              gap: "15px",
-              alignItems: "center",
-              marginRight: "40px",
-            }}
-          >
-            <Button
-              sx={{
-                width: "100px",
-                color: "#fff",
-                fontSize: "16px",
-                textTransform: "capitalize",
-              }}
-              variant="contained"
-              size="small"
-              endIcon={<Share2 size={16} />}
-            >
-              Share
-            </Button>
-            <Button
-              sx={{
-                backgroundColor: "#c144fc",
-                "&:hover": {
-                  backgroundColor: "#9c00e6",
-                },
-                width: "100px",
-                color: "#fff",
-                fontSize: "16px",
-                textTransform: "capitalize",
-              }}
-              variant="contained"
-              size="small"
-              endIcon={<Download size={16} />}
-            >
-              Export
-            </Button>
-          </Box>
-        )}
+        {path !== ROUTES.HOME && <HeaderButtons view="desktop" />}
         {status === "loading" ? (
           <CircularProgress className="mr-[30px] w-[40px] h-[40px] p-2" />
         ) : (

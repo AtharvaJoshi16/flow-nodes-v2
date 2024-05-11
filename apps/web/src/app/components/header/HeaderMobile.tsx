@@ -4,7 +4,6 @@ import { CloudDoneRounded } from "@mui/icons-material";
 import {
   Avatar,
   Box,
-  Button,
   CircularProgress,
   Divider,
   Drawer,
@@ -15,17 +14,12 @@ import {
   Popover,
   Typography,
 } from "@mui/material";
-import {
-  Download,
-  LogOut,
-  Menu as MenuIcon,
-  Share2,
-  UserCog,
-} from "lucide-react";
+import { LogOut, Menu as MenuIcon, UserCog } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { HeaderProps } from "../../../../types/components/header.types";
 import { ROUTES } from "../../../../types/routes.enum";
+import { HeaderButtons } from "../headerButtons/headerButtons";
 
 export const HeaderMobile = ({
   path,
@@ -69,48 +63,7 @@ export const HeaderMobile = ({
           </ListItem>
         </List>
         <Divider />
-        {path !== ROUTES.HOME && (
-          <>
-            <Button
-              fullWidth
-              sx={{
-                padding: "4px 20px",
-                color: "#fff",
-                fontSize: "16px",
-                textTransform: "capitalize",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-              variant="contained"
-              size="small"
-              endIcon={<Share2 size={16} />}
-            >
-              Share
-            </Button>
-            <Button
-              fullWidth
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                backgroundColor: "#c144fc",
-                "&:hover": {
-                  backgroundColor: "#9c00e6",
-                },
-                padding: "4px 20px",
-                color: "#fff",
-                fontSize: "16px",
-                textTransform: "capitalize",
-              }}
-              variant="contained"
-              size="small"
-              endIcon={<Download size={16} />}
-            >
-              Export
-            </Button>
-          </>
-        )}
+        {path !== ROUTES.HOME && <HeaderButtons view="mobile" />}
       </Box>
     );
   };

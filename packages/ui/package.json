@@ -8,7 +8,8 @@
     "./github": "./src/Icons/Github.tsx",
     "./google": "./src/Icons/Google.tsx",
     "./logo": "./src/Logo.tsx",
-    "./new-canvas-card": "./src/NewCanvasCard.tsx"
+    "./new-canvas-card": "./src/NewCanvasCard.tsx",
+    "./canvas-card": "./src/CanvasCard.tsx"
   },
   "scripts": {
     "build": "tsup",
