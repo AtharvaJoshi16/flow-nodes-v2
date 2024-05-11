@@ -1,13 +1,20 @@
 "use client";
-import { AddRounded } from "@mui/icons-material";
-import { Box, Button } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { TooltipMenu } from "@flownodes/ui/tooltip-menu";
+import { AddRounded, ControlCameraRounded } from "@mui/icons-material";
+import { Box, Button, Tooltip } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import { Node } from "reactflow";
 import { v4 } from "uuid";
+import { HANDLE_POSITIONS } from "../constants/options";
 import { addNode } from "../redux/slices/nodes.slice";
+import { updateHandlePosition } from "../redux/slices/options.slice";
+import { RootState } from "../redux/store";
 
 export const Toolbar = () => {
   const dispatch = useDispatch();
+  const handlePosition = useSelector(
+    (state: RootState) => (state.options as any).handlePosition
+  );
 
   const addNodeHandler = () => {
     const newNode: Node = {
@@ -30,7 +37,8 @@ export const Toolbar = () => {
       className="bg-white border-2 rounded-lg"
       sx={{
         display: "flex",
-        gap: "10px",
+        flexDirection: "column",
+        gap: "4px",
         padding: "10px",
         zIndex: 1000,
         position: "absolute",
@@ -48,6 +56,29 @@ export const Toolbar = () => {
       >
         <AddRounded className="text-slate-600" />
       </Button>
+      <Tooltip
+        title={
+          <TooltipMenu
+            onSelect={(selected) => {
+              dispatch(updateHandlePosition(selected));
+            }}
+            option={handlePosition}
+            options={HANDLE_POSITIONS}
+          />
+        }
+        arrow
+        placement="right"
+      >
+        <Button
+          variant="text"
+          sx={{
+            padding: "6px",
+            minWidth: "auto",
+          }}
+        >
+          <ControlCameraRounded className="text-slate-600" />
+        </Button>
+      </Tooltip>
     </Box>
   );
 };

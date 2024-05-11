@@ -9,7 +9,8 @@
     "./google": "./src/Icons/Google.tsx",
     "./logo": "./src/Logo.tsx",
     "./new-canvas-card": "./src/NewCanvasCard.tsx",
-    "./canvas-card": "./src/CanvasCard.tsx"
+    "./canvas-card": "./src/CanvasCard.tsx",
+    "./tooltip-menu": "./src/TooltipMenu.tsx"
   },
   "scripts": {
     "build": "tsup",
