@@ -15,3 +15,11 @@ export const updateNodesReducer = (
 ) => {
   state.nodes = action.payload;
 };
+
+export const updateSingleNodeReducer = (
+  state: NodesState,
+  action: PayloadAction<Node>
+) => {
+  const idx = state.nodes.findIndex((node) => node.id === action.payload.id);
+  state.nodes[idx] = action.payload;
+};

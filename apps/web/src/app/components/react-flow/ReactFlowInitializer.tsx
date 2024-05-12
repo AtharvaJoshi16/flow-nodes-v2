@@ -32,12 +32,18 @@ export const ReactFlowInitializer = ({
   const dispatch = useDispatch();
   const nodes = useSelector((state: RootState) => state.node.nodes);
   const edges = useSelector((state: RootState) => state.edge.edges);
+  const edgeStyle = useSelector((state: RootState) => state.options.edgeStyle);
   const connectingNodeId = useRef(null);
+  const connectingHandleId = useRef(null);
   const { screenToFlowPosition } = useReactFlow();
 
-  const onConnectStart: OnConnectStart = useCallback((_, { nodeId }) => {
-    connectingNodeId.current = nodeId as any;
-  }, []);
+  const onConnectStart: OnConnectStart = useCallback(
+    (_, { nodeId, handleId }) => {
+      connectingNodeId.current = nodeId as any;
+      connectingHandleId.current = handleId as any;
+    },
+    []
+  );
 
   const onConnectEnd: OnConnectEnd = useCallback(
     (event) => {
@@ -58,18 +64,19 @@ export const ReactFlowInitializer = ({
           data: { label: `New Node` },
           type: "basic",
         };
-
         dispatch(addNode(newNode));
         dispatch(
           addEdge({
             id,
             source: connectingNodeId.current,
             target: id,
+            type: edgeStyle.style as string,
+            sourceHandle: connectingHandleId.current,
           })
         );
       }
     },
-    [screenToFlowPosition]
+    [screenToFlowPosition, edgeStyle]
   );
 
   const onNodesChange = useCallback(

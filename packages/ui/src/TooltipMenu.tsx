@@ -18,6 +18,7 @@ export const TooltipMenu = ({
     <List component="div">
       {options.map((option) => (
         <ListItemButton
+          title={option.title}
           sx={{
             borderRadius: "5px",
           }}

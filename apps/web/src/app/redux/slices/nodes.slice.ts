@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Node } from "reactflow";
-import { addNodeReducer, updateNodesReducer } from "../reducers/nodes.reducers";
+import {
+  addNodeReducer,
+  updateNodesReducer,
+  updateSingleNodeReducer,
+} from "../reducers/nodes.reducers";
 export interface NodesState {
   nodes: Node[];
 }
@@ -15,8 +19,9 @@ export const nodeSlice = createSlice({
   reducers: {
     addNode: addNodeReducer,
     updateNodes: updateNodesReducer,
+    updateSingleNode: updateSingleNodeReducer,
   },
 });
 
-export const { addNode, updateNodes } = nodeSlice.actions;
+export const { addNode, updateNodes, updateSingleNode } = nodeSlice.actions;
 export default nodeSlice.reducer;

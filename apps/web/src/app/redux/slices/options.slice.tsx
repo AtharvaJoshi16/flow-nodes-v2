@@ -1,22 +1,27 @@
-import { HANDLE_POSITIONS } from "@/app/constants/options";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { EDGE_STYLES, HANDLE_POSITIONS } from "@/app/constants/options";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  updateEdgeStyleReducer,
+  updateHandlePositionReducer,
+} from "../reducers/options.reducers";
 export interface Options {
   handlePosition: any;
+  edgeStyle: any;
 }
 
 const initialState: Options = {
   handlePosition: HANDLE_POSITIONS[0],
+  edgeStyle: EDGE_STYLES[0],
 };
 
-export const optionsSlice: any = createSlice({
+export const optionsSlice = createSlice({
   name: "options",
   initialState,
   reducers: {
-    updateHandlePosition: (state, action: PayloadAction<any>) => {
-      state.handlePosition = action.payload;
-    },
+    updateHandlePosition: updateHandlePositionReducer,
+    updateEdgeStyle: updateEdgeStyleReducer,
   },
 });
 
-export const { updateHandlePosition } = optionsSlice.actions;
+export const { updateHandlePosition, updateEdgeStyle } = optionsSlice.actions;
 export default optionsSlice.reducer;
